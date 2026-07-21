@@ -12,9 +12,7 @@ Geometry Calculator is an interactive web application that helps users calculate
 - Browse a formula reference and calculation history
 - Support multiple units such as cm, m, in, and ft
 
-## Screenshots
 
-Add screenshots of the home page and calculator pages here before sharing the project publicly.
 
 ## Project Structure
 
