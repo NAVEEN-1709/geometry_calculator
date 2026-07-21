@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Geometry Calculator{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="/">
+
+                <i class="bi bi-calculator"></i>
+
+                Geometry Calculator
+
+            </a>
+
+            <button
+                class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/">Home</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/formulas">Formula Book</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/history">History</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/about">About</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/contact">Contact</a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Page Content -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <h5 class="mb-3">Geometry Calculator</h5>
+            <p class="mb-2">Built with</p>
+            <div class="d-flex justify-content-center flex-wrap gap-3 mb-3">
+                <span class="badge bg-light text-dark">Python</span>
+                <span class="badge bg-light text-dark">Flask</span>
+                <span class="badge bg-light text-dark">Bootstrap</span>
+                <span class="badge bg-light text-dark">SVG</span>
+            </div>
+            <p class="mb-0">© 2026</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

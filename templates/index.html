@@ -1,0 +1,390 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+
+<section class="container text-center py-5">
+
+    <h1 class="display-3 fw-bold mb-3">
+        Geometry Calculator
+    </h1>
+
+    <p class="lead mb-4 text-muted">
+        An interactive web application to calculate 2D & 3D geometric shapes with dynamic SVG visualization.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="#all-shapes" class="btn btn-primary btn-lg">
+            Get Started
+        </a>
+        <a href="/formulas" class="btn btn-outline-secondary btn-lg">
+            Formula Book
+        </a>
+    </div>
+
+</section>
+
+<!-- Statistics-->
+<div class="container">
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <a href="#2d-shapes" class="text-decoration-none text-dark d-block h-100">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="bi bi-bounding-box fs-1 text-primary"></i>
+                        <h2 class="mt-3 mb-1">9</h2>
+                        <h5 class="mb-0">2D Shapes</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="#3d-shapes" class="text-decoration-none text-dark d-block h-100">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="bi bi-box fs-1 text-success"></i>
+                        <h2 class="mt-3 mb-1">5</h2>
+                        <h5 class="mb-0">3D Shapes</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="#all-shapes" class="text-decoration-none text-dark d-block h-100">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="bi bi-calculator fs-1 text-danger"></i>
+                        <h2 class="mt-3 mb-1">14</h2>
+                        <h5 class="mb-0">Calculators</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Search Bar -->
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+
+                    <i class="bi bi-search"></i>
+
+                </span>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search shapes">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Features Section -->
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body text-center py-4">
+            <h3 class="mb-4">Why Choose Geometry Calculator?</h3>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <p class="mb-1"><i class="bi bi-diagram-3 text-primary"></i> Interactive SVG</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="mb-1"><i class="bi bi-phone text-success"></i> Responsive Design</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="mb-1"><i class="bi bi-lightning-charge text-warning"></i> Instant Calculations</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="mb-1"><i class="bi bi-book text-info"></i> Formula Reference</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="mb-1"><i class="bi bi-collection text-danger"></i> 14 Shape Calculators</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shape Cards -->
+
+<div class="container mt-5" id="all-shapes">
+
+    <h2 class="text-center mb-4" id="2d-shapes">
+
+        2D Shapes
+
+    </h2>
+
+    <div class="row justify-content-center g-4 align-items-stretch">
+
+        <!-- Rectangle -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h1>📐</h1>
+
+                    <h4>Rectangle</h4>
+
+                    <p>
+                        Area<br>
+                        Perimeter<br>
+                        Diagonal
+                    </p>
+
+                    <a href="/rectangle" class="btn btn-success">
+
+                        Calculate
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Square -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h1>⬛</h1>
+
+                    <h4>Square</h4>
+
+                    <p>
+                        Area<br>
+                        Perimeter<br>
+                        Diagonal
+                    </p>
+
+                    <a href="/square" class="btn btn-success">
+
+                        Calculate
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Triangle -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h1>🔺</h1>
+
+                    <h4>Triangle</h4>
+
+                    <p>
+                        Area<br>
+                        Perimeter<br>
+                        Height
+                    </p>
+
+                    <a href="/triangle" class="btn btn-success">
+                        Calculate
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="col-md-4 mb-4">
+
+            <div class="card shape-card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-circle fs-1 text-primary"></i>
+
+                    <h3 class="mt-3">Circle</h3>
+
+                    <p class="mb-0">Area<br>Circumference<br>Diameter</p>
+
+                </div>
+
+                <div class="card-footer bg-transparent border-0 text-center">
+
+                    <a href="/circle" class="btn btn-success">
+                        Calculate
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-circle-square fs-1 text-warning"></i>
+                    <h3 class="mt-3">Ellipse</h3>
+                    <p class="mb-0">Area<br>Perimeter<br>Axes</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/ellipse" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-diamond fs-1 text-info"></i>
+                    <h3 class="mt-3">Rhombus</h3>
+                    <p class="mb-0">Area<br>Perimeter<br>Diagonals</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/rhombus" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-triangle-half fs-1 text-secondary"></i>
+                    <h3 class="mt-3">Trapezium</h3>
+                    <p class="mb-0">Area<br>Perimeter<br>Height</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/trapezium" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-pentagon fs-1 text-danger"></i>
+                    <h3 class="mt-3">Pentagon</h3>
+                    <p class="mb-0">Area<br>Perimeter</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/pentagon" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-hexagon fs-1 text-success"></i>
+                    <h3 class="mt-3">Hexagon</h3>
+                    <p class="mb-0">Area<br>Perimeter</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/hexagon" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+    <div class="container mt-5" id="3d-shapes">
+        <h2 class="text-center mb-4">3D Shapes</h2>
+        <div class="row justify-content-center g-4 align-items-stretch">
+            <div class="col-md-4 mb-4">
+                <div class="card shape-card shadow h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-box-seam fs-1 text-primary"></i>
+                        <h3 class="mt-3">Cube</h3>
+                        <p class="mb-0">Surface Area<br>Volume<br>Diagonal</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 text-center">
+                        <a href="/cube" class="btn btn-success">Calculate</a>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-box fs-1 text-success"></i>
+                    <h3 class="mt-3">Cuboid</h3>
+                    <p class="mb-0">Surface Area<br>Volume<br>Diagonal</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/cuboid" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-bucket fs-1 text-warning"></i>
+                    <h3 class="mt-3">Cylinder</h3>
+                    <p class="mb-0">Surface Area<br>Curved Area<br>Volume</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/cylinder" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-cone-striped fs-1 text-info"></i>
+                    <h3 class="mt-3">Cone</h3>
+                    <p class="mb-0">Surface Area<br>Slant Height<br>Volume</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/cone" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shape-card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-circle-fill fs-1 text-danger"></i>
+                    <h3 class="mt-3">Sphere</h3>
+                    <p class="mb-0">Surface Area<br>Volume</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <a href="/sphere" class="btn btn-success">Calculate</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

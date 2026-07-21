@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+
+{% block title %}
+Triangle Calculator
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h3 class="text-center">
+                Triangle Calculator
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-success shadow-sm">
+
+                <h4 class="mb-3">
+                    📘 Triangle Formula
+                </h4>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <h5>📐 Area</h5>
+
+                        <h5 class="fw-bold text-success">
+                            A = ½ × b × h
+                        </h5>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <h5>📏 Perimeter</h5>
+
+                        <h5 class="fw-bold text-success">
+                            P = s₁ + s₂ + b
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="text-center mb-4">
+                <svg
+                    viewBox="0 0 500 320"
+                    class="img-fluid">
+                    <defs>
+
+                        <marker
+                            id="arrow"
+                            markerWidth="8"
+                            markerHeight="8"
+                            refX="4"
+                            refY="4"
+                            orient="auto">
+
+                            <path
+                                d="M0,0 L8,4 L0,8 Z"
+                                fill="#dc3545"/>
+
+                        </marker>
+
+                    </defs>
+                    {% set display_base = base if base is not none else 0 %}
+                    {% set display_height = height if height is not none else 0 %}
+                    {% set svg_base = display_base * scale %}
+                    {% set svg_height = display_height * scale %}
+                    {% set center_x = 250 %}
+                    {% set bottom_y = 250 %}
+                    {% set top_y = bottom_y - svg_height %}
+
+                    {% if display_base > 0 and display_height > 0 %}
+                    <polygon
+                    points="
+                    {{ center_x }},{{ top_y }}
+                    {{ center_x-(svg_base/2) }},{{ bottom_y }}
+                    {{ center_x+(svg_base/2) }},{{ bottom_y }}
+                    "
+                    fill="#dbeafe"
+                    stroke="#2563eb"
+                    stroke-width="4"/>
+
+                    <circle
+                        cx="{{ center_x }}"
+                        cy="{{ top_y }}"
+                        r="4"
+                        fill="#198754"/>
+
+                    <circle
+                        cx="{{ center_x }}"
+                        cy="{{ bottom_y }}"
+                        r="4"
+                        fill="#198754"/>
+
+                    <text
+                        x="{{ center_x-(svg_base/4)-35 }}"
+                        y="{{ top_y+(svg_height/2) }}"
+                        fill="#198754"
+                        font-size="15">
+
+                        {{ side1 }}
+
+                    </text>
+
+                    <text
+                        x="{{ center_x+(svg_base/4)+60 }}"
+                        y="{{ top_y+(svg_height/2) }}"
+                        fill="#6f42c1"
+                        font-size="15">
+
+                        {{ side2 }}
+
+                    </text>
+
+                    <line
+                        x1="{{ center_x+25 }}"
+                        y1="{{ top_y }}"
+                        x2="{{ center_x+25 }}"
+                        y2="{{ bottom_y }}"
+                        stroke="#dc3545"
+                        stroke-width="2"
+                        marker-start="url(#arrow)"
+                        marker-end="url(#arrow)"/>
+
+                    <text
+                        x="{{ center_x+40 }}"
+                        y="{{ (top_y+bottom_y)/2 }}"
+                        fill="#dc3545"
+                        font-size="16">
+
+                        H = {{ height }}
+
+                    </text>
+
+                    <line
+                        x1="{{ center_x-(svg_base/2) }}"
+                        y1="{{ bottom_y+20 }}"
+                        x2="{{ center_x+(svg_base/2) }}"
+                        y2="{{ bottom_y+20 }}"
+                        stroke="#000000"
+                        stroke-width="2"
+                        marker-start="url(#arrow)"
+                        marker-end="url(#arrow)"/>
+
+                    <text
+                        x="{{ center_x }}"
+                        y="{{ bottom_y+45 }}"
+                        text-anchor="middle"
+                        font-size="16"
+                        font-weight="bold">
+
+                        Base = {{ base }}
+
+                    </text>
+                    {% endif %}
+
+                </svg>
+            </div>
+
+            {% if error %}
+
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+            <form method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <label class="form-label">Base</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            class="form-control"
+                            name="base"
+                            value="{{ base if base else '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label class="form-label">Height</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            class="form-control"
+                            name="height"
+                            value="{{ height if height else '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label class="form-label">Side 1</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            class="form-control"
+                            name="side1"
+                            value="{{ side1 if side1 else '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label class="form-label">Side 2</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            class="form-control"
+                            name="side2"
+                            value="{{ side2 if side2 else '' }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Unit</label>
+                        <select class="form-select" name="unit">
+                            <option value="cm" {% if unit == 'cm' %}selected{% endif %}>cm</option>
+                            <option value="m" {% if unit == 'm' %}selected{% endif %}>m</option>
+                            <option value="in" {% if unit == 'in' %}selected{% endif %}>in</option>
+                            <option value="ft" {% if unit == 'ft' %}selected{% endif %}>ft</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+
+                    <button type="submit" class="btn btn-success">
+                        Calculate
+                    </button>
+
+                    <a href="/triangle" class="btn btn-secondary">
+                        Reset
+                    </a>
+
+                    <a href="/" class="btn btn-primary">
+                        Home
+                    </a>
+
+                </div>
+
+            </form>
+
+            {% if area %}
+
+            <hr>
+
+            <div class="row text-center g-4">
+
+                <!-- Area -->
+
+                <div class="col-md-4">
+
+                    <div class="card bg-primary text-white h-100 shadow" data-bs-toggle="tooltip" title="Area of the triangle">
+
+                        <div class="card-body">
+
+                            <h5><i class="bi bi-triangle-half fs-2"></i></h5>
+
+                            <h2 class="text-white display-4 fw-bold">
+
+                                {{ area }}
+
+                            </h2>
+
+                            <p class="text-white-50 mb-0">
+                                {{ unit }}²
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Perimeter -->
+
+                <div class="col-md-4">
+
+                    <div class="card bg-success text-white h-100 shadow" data-bs-toggle="tooltip" title="Perimeter of the triangle">
+
+                        <div class="card-body">
+
+                            <h5><i class="bi bi-rulers fs-2"></i></h5>
+
+                            <h2 class="text-white display-4 fw-bold">
+
+                                {{ perimeter }}
+
+                            </h2>
+
+                            <p class="text-white-50 mb-0">
+                                {{ unit }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Triangle Type -->
+
+                <div class="col-md-4">
+
+                    <div class="card bg-danger text-white h-100 shadow" data-bs-toggle="tooltip" title="Type of triangle based on its sides">
+
+                        <div class="card-body">
+
+                            <h5><i class="bi bi-award fs-2"></i></h5>
+
+                            <h2 class="text-white fw-bold">
+
+                                {{ triangle_type }}
+
+                            </h2>
+
+                            <p class="text-white-50 mb-0">
+                                Classification
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

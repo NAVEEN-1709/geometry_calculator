@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+Rhombus Calculator
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">
+        Rhombus Calculator
+    </h1>
+
+    {% if area %}
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>🔷 Formula</h3>
+
+            <hr>
+
+            <p><strong>Area:</strong> ½ × Diagonal 1 × Diagonal 2</p>
+
+            <p><strong>Perimeter:</strong> 4 × Side</p>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mb-4">
+
+        <svg viewBox="0 0 500 320" class="img-fluid">
+            <polygon points="250,50 400,160 250,270 100,160" fill="#dbeafe" stroke="#2563eb" stroke-width="4" />
+            <line x1="250" y1="50" x2="250" y2="270" stroke="#dc3545" stroke-width="3" />
+            <line x1="100" y1="160" x2="400" y2="160" stroke="#198754" stroke-width="3" />
+            <text x="255" y="40" fill="#dc3545" font-size="16">D1</text>
+            <text x="405" y="165" fill="#198754" font-size="16">D2</text>
+        </svg>
+
+    </div>
+
+    {% endif %}
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Side</label>
+            <input type="number" class="form-control" name="side" step="any" value="{{ side if side else '' }}" placeholder="Enter Side" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Diagonal 1</label>
+            <input type="number" class="form-control" name="diagonal1" step="any" value="{{ diagonal1 if diagonal1 else '' }}" placeholder="Enter Diagonal 1" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Diagonal 2</label>
+            <input type="number" class="form-control" name="diagonal2" step="any" value="{{ diagonal2 if diagonal2 else '' }}" placeholder="Enter Diagonal 2" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Unit</label>
+            <select class="form-select" name="unit">
+                <option value="cm" {% if unit == 'cm' %}selected{% endif %}>cm</option>
+                <option value="m" {% if unit == 'm' %}selected{% endif %}>m</option>
+                <option value="in" {% if unit == 'in' %}selected{% endif %}>in</option>
+                <option value="ft" {% if unit == 'ft' %}selected{% endif %}>ft</option>
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Calculate</button>
+            <a href="/rhombus" class="btn btn-secondary">Reset</a>
+            <a href="/" class="btn btn-dark">Home</a>
+        </div>
+
+    </form>
+
+    {% if area %}
+
+    <hr>
+
+    <div class="row text-center g-4">
+
+        <div class="col-md-4">
+            <div class="card bg-primary text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>🔷</h5>
+                    <h5 class="mb-1">Area</h5>
+                    <h2 class="display-4 fw-bold">{{ area }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}²</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📏</h5>
+                    <h5 class="mb-1">Perimeter</h5>
+                    <h2 class="display-4 fw-bold">{{ perimeter }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📐</h5>
+                    <h5 class="mb-1">Diagonals</h5>
+                    <h6>{{ diagonal1 }} {{ unit }}</h6>
+                    <h6>{{ diagonal2 }} {{ unit }}</h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

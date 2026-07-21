@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}
+Square Calculator
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">
+        Square Calculator
+    </h1>
+
+    {% if area %}
+
+    <div class="text-center mb-4">
+
+        <svg width="600" height="420" viewBox="0 0 600 420">
+
+    <!-- Arrow Definition -->
+    <defs>
+        <marker id="arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="5"
+                refY="5"
+                orient="auto">
+
+            <path
+                d="M0,0 L10,5 L0,10 Z"
+                fill="#2563eb"/>
+        </marker>
+    </defs>
+
+    <!-- Square -->
+    <rect
+        x="120"
+        y="80"
+        width="{{ side * scale }}"
+        height="{{ side * scale }}"
+        fill="#dbeafe"
+        stroke="#2563eb"
+        stroke-width="4"
+        rx="8"/>
+
+    <!-- Top Dimension -->
+    <line
+        x1="120"
+        y1="55"
+        x2="{{ 120 + (side * scale) }}"
+        y2="55"
+        stroke="black"
+        stroke-width="2"
+        marker-start="url(#arrow)"
+        marker-end="url(#arrow)"/>
+
+    <text
+        x="{{ 120 + (side * scale)/2 }}"
+        y="40"
+        text-anchor="middle"
+        font-size="18"
+        font-weight="bold">
+
+        {{ side }}
+
+    </text>
+
+    <!-- Left Dimension -->
+    <line
+        x1="90"
+        y1="80"
+        x2="90"
+        y2="{{ 80 + (side * scale) }}"
+        stroke="black"
+        stroke-width="2"
+        marker-start="url(#arrow)"
+        marker-end="url(#arrow)"/>
+
+    <text
+        x="45"
+        y="{{ 80 + (side * scale)/2 }}"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-size="18"
+        font-weight="bold">
+
+        {{ side }}
+
+    </text>
+
+</svg>
+
+    </div>
+
+    {% endif %}
+
+    <!-- Formula Card -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>⬛ Formula</h3>
+
+            <hr>
+
+            <p><strong>Area:</strong> Side²</p>
+
+            <p><strong>Perimeter:</strong> 4 × Side</p>
+
+            <p><strong>Diagonal:</strong> Side × √2</p>
+
+        </div>
+
+    </div>
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    <!-- Form -->
+
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Side
+
+            </label>
+
+            <input
+                type="number"
+                class="form-control"
+                name="side"
+                step="any"
+                value="{{ side if side else '' }}"
+                placeholder="Enter Side"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Unit</label>
+            <select class="form-select" name="unit">
+                <option value="cm" {% if unit == 'cm' %}selected{% endif %}>cm</option>
+                <option value="m" {% if unit == 'm' %}selected{% endif %}>m</option>
+                <option value="in" {% if unit == 'in' %}selected{% endif %}>in</option>
+                <option value="ft" {% if unit == 'ft' %}selected{% endif %}>ft</option>
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                Calculate
+
+            </button>
+
+            <a
+                href="/square"
+                class="btn btn-secondary">
+
+                Reset
+
+            </a>
+
+            <a
+                href="/"
+                class="btn btn-dark">
+
+                Home
+
+            </a>
+
+        </div>
+
+    </form>
+
+    {% if area %}
+
+    <hr>
+
+    <div class="row text-center g-4 mt-2">
+
+        <div class="col-md-4">
+            <div class="card bg-primary text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>⬛</h5>
+                    <h5 class="mb-1">Area</h5>
+                    <h2 class="display-4 fw-bold">{{ area }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}²</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📏</h5>
+                    <h5 class="mb-1">Perimeter</h5>
+                    <h2 class="display-4 fw-bold">{{ perimeter }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>🔗</h5>
+                    <h5 class="mb-1">Diagonal</h5>
+                    <h2 class="display-4 fw-bold">{{ diagonal }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

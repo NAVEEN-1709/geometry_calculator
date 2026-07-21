@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}
+Pentagon Calculator
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">
+        Pentagon Calculator
+    </h1>
+
+    {% if area %}
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>🔷 Formula</h3>
+
+            <hr>
+
+            <p><strong>Area:</strong> ¼ × √(5(5 + 2√5)) × side²</p>
+
+            <p><strong>Perimeter:</strong> 5 × side</p>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mb-4">
+
+        <svg viewBox="0 0 500 320" class="img-fluid">
+            <polygon points="250,50 370,130 325,250 175,250 130,130" fill="#dbeafe" stroke="#2563eb" stroke-width="4" />
+            <text x="250" y="35" text-anchor="middle" fill="#2563eb" font-size="18">Pentagon</text>
+        </svg>
+
+    </div>
+
+    {% endif %}
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Side Length</label>
+            <input type="number" class="form-control" name="side" step="any" value="{{ side if side else '' }}" placeholder="Enter Side Length" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Unit</label>
+            <select class="form-select" name="unit">
+                <option value="cm" {% if unit == 'cm' %}selected{% endif %}>cm</option>
+                <option value="m" {% if unit == 'm' %}selected{% endif %}>m</option>
+                <option value="in" {% if unit == 'in' %}selected{% endif %}>in</option>
+                <option value="ft" {% if unit == 'ft' %}selected{% endif %}>ft</option>
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Calculate</button>
+            <a href="/pentagon" class="btn btn-secondary">Reset</a>
+            <a href="/" class="btn btn-dark">Home</a>
+        </div>
+
+    </form>
+
+    {% if area %}
+
+    <hr>
+
+    <div class="row text-center g-4">
+
+        <div class="col-md-4">
+            <div class="card bg-primary text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>🔷</h5>
+                    <h5 class="mb-1">Area</h5>
+                    <h2 class="display-4 fw-bold">{{ area }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}²</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📏</h5>
+                    <h5 class="mb-1">Perimeter</h5>
+                    <h2 class="display-4 fw-bold">{{ perimeter }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📐</h5>
+                    <h5 class="mb-1">Side</h5>
+                    <h6>{{ side }} {{ unit }}</h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

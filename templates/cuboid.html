@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cuboid Calculator
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">
+        Cuboid Calculator
+    </h1>
+
+    {% if surface_area %}
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>📦 Formula</h3>
+
+            <hr>
+
+            <p><strong>Surface Area:</strong> 2(ab + bc + ac)</p>
+
+            <p><strong>Volume:</strong> a × b × c</p>
+
+            <p><strong>Diagonal:</strong> √(a² + b² + c²)</p>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mb-4">
+
+        <svg viewBox="0 0 500 320" class="img-fluid">
+            <polygon points="140,130 300,80 420,150 260,200" fill="#dbeafe" stroke="#2563eb" stroke-width="4" />
+            <polygon points="140,130 140,250 260,300 260,200" fill="#e7f1ff" stroke="#2563eb" stroke-width="4" />
+            <line x1="140" y1="130" x2="140" y2="250" stroke="#198754" stroke-width="3" />
+            <line x1="300" y1="80" x2="300" y2="200" stroke="#dc3545" stroke-width="3" />
+        </svg>
+
+    </div>
+
+    {% endif %}
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Length (a)</label>
+            <input type="number" class="form-control" name="length" step="any" value="{{ length if length else '' }}" placeholder="Enter Length" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Width (b)</label>
+            <input type="number" class="form-control" name="width" step="any" value="{{ width if width else '' }}" placeholder="Enter Width" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Height (c)</label>
+            <input type="number" class="form-control" name="height" step="any" value="{{ height if height else '' }}" placeholder="Enter Height" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Unit</label>
+            <select class="form-select" name="unit">
+                <option value="cm" {% if unit == 'cm' %}selected{% endif %}>cm</option>
+                <option value="m" {% if unit == 'm' %}selected{% endif %}>m</option>
+                <option value="in" {% if unit == 'in' %}selected{% endif %}>in</option>
+                <option value="ft" {% if unit == 'ft' %}selected{% endif %}>ft</option>
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Calculate</button>
+            <a href="/cuboid" class="btn btn-secondary">Reset</a>
+            <a href="/" class="btn btn-dark">Home</a>
+        </div>
+
+    </form>
+
+    {% if surface_area %}
+
+    <hr>
+
+    <div class="row text-center g-4">
+
+        <div class="col-md-4">
+            <div class="card bg-primary text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📏</h5>
+                    <h5 class="mb-1">Surface Area</h5>
+                    <h2 class="display-4 fw-bold">{{ surface_area }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}²</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📦</h5>
+                    <h5 class="mb-1">Volume</h5>
+                    <h2 class="display-4 fw-bold">{{ volume }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}³</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📐</h5>
+                    <h5 class="mb-1">Dimensions</h5>
+                    <h6>{{ length }} × {{ width }} × {{ height }} {{ unit }}</h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

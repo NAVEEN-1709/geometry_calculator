@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+
+{% block title %}
+Rectangle Calculator
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <!-- Page Heading -->
+    <h1 class="text-center mb-4">
+        Rectangle Calculator
+    </h1>
+
+    <!-- Dynamic Rectangle Visualization -->
+    {% if area %}
+
+    <div class="text-center mb-4">
+
+        <svg width="700" height="350">
+
+    <!-- Arrow Definition -->
+    <defs>
+
+        <marker id="arrow"
+                markerWidth="10"
+                markerHeight="10"
+                refX="5"
+                refY="5"
+                orient="auto">
+
+            <path
+                d="M0,0 L10,5 L0,10 Z"
+                fill="#2563eb"/>
+
+        </marker>
+
+    </defs>
+
+    <!-- Rectangle -->
+    <rect
+        x="180"
+        y="80"
+        width="{{ length * scale }}"
+        height="{{ width * scale }}"
+        fill="#dbeafe"
+        stroke="#2563eb"
+        stroke-width="4"
+        rx="8"/>
+
+    <!-- Top Dimension Line -->
+    <line
+        x1="180"
+        y1="55"
+        x2="{{ 180 + (length * scale) }}"
+        y2="55"
+        stroke="black"
+        stroke-width="2"
+        marker-start="url(#arrow)"
+        marker-end="url(#arrow)"/>
+
+    <!-- Length Label -->
+    <text
+        x="{{ 180 + (length * scale / 2) }}"
+        y="40"
+        text-anchor="middle"
+        font-size="18"
+        font-weight="bold">
+
+        {{ length }}
+
+    </text>
+
+    <!-- Left Dimension Line -->
+    <line
+        x1="150"
+        y1="80"
+        x2="150"
+        y2="{{ 80 + (width * scale) }}"
+        stroke="black"
+        stroke-width="2"
+        marker-start="url(#arrow)"
+        marker-end="url(#arrow)"/>
+
+    <!-- Width Label -->
+    <text
+        x="100"
+        y="{{ 80 + (width * scale / 2) }}"
+        text-anchor="middle"
+        font-size="18"
+        font-weight="bold">
+
+        {{ width }}
+
+    </text>
+
+</svg>
+
+    </div>
+
+    {% endif %}
+
+    <!-- Formula Card -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>📐 Formula</h3>
+
+            <hr>
+
+            <p>
+                <strong>Area:</strong>
+                Length × Width
+            </p>
+
+            <p>
+                <strong>Perimeter:</strong>
+                2 × (Length + Width)
+            </p>
+
+            <p>
+                <strong>Diagonal:</strong>
+                √(Length² + Width²)
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Error Message -->
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    <!-- Input Form -->
+
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Length
+
+            </label>
+
+            <input
+                type="number"
+                class="form-control"
+                name="length"
+                step="any"
+                placeholder="Enter Length"
+                value="{{ length if length else '' }}"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Width
+
+            </label>
+
+            <input
+                type="number"
+                class="form-control"
+                name="width"
+                step="any"
+                placeholder="Enter Width"
+                value="{{ width if width else '' }}"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Unit</label>
+            <select class="form-select" name="unit">
+                <option value="cm" {% if unit == 'cm' %}selected{% endif %}>cm</option>
+                <option value="m" {% if unit == 'm' %}selected{% endif %}>m</option>
+                <option value="in" {% if unit == 'in' %}selected{% endif %}>in</option>
+                <option value="ft" {% if unit == 'ft' %}selected{% endif %}>ft</option>
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                Calculate
+
+            </button>
+
+            <a
+                href="/rectangle"
+                class="btn btn-secondary">
+
+                Reset
+
+            </a>
+
+            <a
+                href="/"
+                class="btn btn-dark">
+
+                Home
+
+            </a>
+
+        </div>
+
+    </form>
+
+    <!-- Results -->
+
+    {% if area %}
+
+    <hr>
+
+    <div class="row text-center g-4 mt-2">
+
+        <div class="col-md-4">
+            <div class="card bg-primary text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📐</h5>
+                    <h5 class="mb-1">Area</h5>
+                    <h2 class="display-4 fw-bold">{{ area }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}²</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>📏</h5>
+                    <h5 class="mb-1">Perimeter</h5>
+                    <h2 class="display-4 fw-bold">{{ perimeter }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-info text-white h-100 shadow">
+                <div class="card-body">
+                    <h5>🔗</h5>
+                    <h5 class="mb-1">Diagonal</h5>
+                    <h2 class="display-4 fw-bold">{{ diagonal }}</h2>
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

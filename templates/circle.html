@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+
+{% block title %}
+Circle Calculator
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">
+        Circle Calculator
+    </h1>
+
+    {% if area %}
+
+    <div class="alert alert-primary shadow-sm">
+
+        <h4>📘 Circle Formula</h4>
+
+        <div class="p-2">
+
+            <h5 class="mb-1">Area</h5>
+
+            <p class="mb-2">A = πr²</p>
+
+            <h5 class="mb-1">Circumference</h5>
+
+            <p class="mb-2">C = 2πr</p>
+
+            <h5 class="mb-1">Diameter</h5>
+
+            <p class="mb-0">D = 2r</p>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mb-4">
+
+        <svg
+            viewBox="0 0 500 320"
+            class="img-fluid">
+
+            <circle
+
+                cx="250"
+
+                cy="160"
+
+                r="{{ radius * scale }}"
+
+                fill="#dbeafe"
+
+                stroke="#2563eb"
+
+                stroke-width="4"/>
+
+            <!-- Center Point -->
+            <circle
+                cx="250"
+                cy="160"
+                r="6"
+                fill="red"/>
+
+            <text
+                x="250"
+                y="145"
+                text-anchor="middle"
+                fill="red"
+                font-size="18"
+                font-weight="bold">
+                Center
+            </text>
+
+            <!-- Radius -->
+            <text
+                x="305"
+                y="145"
+                fill="red"
+                font-size="18"
+                font-weight="bold">
+                R = {{ radius }}
+            </text>
+
+            <line
+                x1="250"
+                y1="160"
+                x2="350"
+                y2="160"
+                stroke="red"
+                stroke-width="4"/>
+
+            <line
+                x1="150"
+                y1="160"
+                x2="350"
+                y2="160"
+                stroke="#198754"
+                stroke-width="3"
+                stroke-dasharray="8,5"/>
+
+            <text
+                x="250"
+                y="200"
+                text-anchor="middle"
+                fill="#198754"
+                font-size="20"
+                font-weight="bold">
+                Diameter = {{ diameter }}
+            </text>
+
+        </svg>
+
+    </div>
+
+    {% endif %}
+
+    <!-- Formula Card -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>⭕ Formula</h3>
+
+            <hr>
+
+            <p><strong>Area:</strong> π × Radius²</p>
+
+            <p><strong>Circumference:</strong> 2 × π × Radius</p>
+
+            <p><strong>Diameter:</strong> 2 × Radius</p>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-info text-white">
+
+            <h4>
+                📖 Step-by-Step Calculation
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if area %}
+
+            <p>
+                <strong>Given:</strong>
+            </p>
+
+            <ul>
+                <li>Radius = {{ radius }}</li>
+            </ul>
+
+            <hr>
+
+            <p>
+                Area = π × r²
+            </p>
+
+            <p>
+                = 3.1416 × {{ radius }}²
+            </p>
+
+            <p>
+                = {{ area }}
+            </p>
+
+            <hr>
+
+            <p>
+                Circumference = 2 × π × r
+            </p>
+
+            <p>
+                = {{ circumference }}
+            </p>
+
+            <hr>
+
+            <p>
+                Diameter = 2 × Radius
+            </p>
+
+            <p>
+                = {{ diameter }}
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    <!-- Form -->
+
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Radius
+
+            </label>
+
+            <input
+                type="number"
+                class="form-control"
+                name="radius"
+                step="any"
+                value="{{ radius if radius else '' }}"
+                placeholder="Enter Radius"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Unit
+            </label>
+
+            <select class="form-select" name="unit">
+                <option value="cm" {% if unit == 'cm' %}selected{% endif %}>cm</option>
+                <option value="m" {% if unit == 'm' %}selected{% endif %}>m</option>
+                <option value="in" {% if unit == 'in' %}selected{% endif %}>in</option>
+                <option value="ft" {% if unit == 'ft' %}selected{% endif %}>ft</option>
+            </select>
+
+        </div>
+
+        <div class="d-flex gap-2">
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                Calculate
+
+            </button>
+
+            <a
+                href="/circle"
+                class="btn btn-secondary">
+
+                Reset
+
+            </a>
+
+            <a
+                href="/"
+                class="btn btn-dark">
+
+                Home
+
+            </a>
+
+        </div>
+
+    </form>
+
+    {% if area %}
+
+    <hr>
+
+    <div class="row text-center g-4">
+
+        <div class="col-md-4">
+
+            <div class="card bg-primary text-white h-100 shadow">
+
+                <div class="card-body">
+
+                    <h5>🟦</h5>
+
+                    <h5 class="mb-1">Area</h5>
+
+                    <h2 class="display-4 fw-bold">{{ area }}</h2>
+
+                    <p class="text-white-50 mb-0">{{ unit }}²</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card bg-success text-white h-100 shadow">
+
+                <div class="card-body">
+
+                    <h5>🟩</h5>
+
+                    <h5 class="mb-1">Circumference</h5>
+
+                    <h2 class="display-4 fw-bold">{{ circumference }}</h2>
+
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card bg-purple text-white h-100 shadow" style="background-color: #6f42c1;">
+
+                <div class="card-body">
+
+                    <h5>🟪</h5>
+
+                    <h5 class="mb-1">Diameter</h5>
+
+                    <h2 class="display-4 fw-bold">{{ diameter }}</h2>
+
+                    <p class="text-white-50 mb-0">{{ unit }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

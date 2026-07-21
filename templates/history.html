@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">Calculation History</h1>
+
+    {% if history %}
+
+    <div class="list-group">
+
+        {% for entry in history %}
+
+        <div class="list-group-item mb-3 shadow-sm">
+
+            <h5>{{ entry.shape }}</h5>
+
+            <p class="mb-1"><strong>Unit:</strong> {{ entry.unit }}</p>
+
+            <p class="mb-1"><strong>Time:</strong> {{ entry.timestamp }}</p>
+
+            <hr>
+
+            {% for label, value in entry.inputs.items() %}
+            <p class="mb-1"><strong>{{ label }}:</strong> {{ value }}</p>
+            {% endfor %}
+
+            <hr>
+
+            {% for label, value in entry.results.items() %}
+            <p class="mb-1"><strong>{{ label }}:</strong> {{ value }}</p>
+            {% endfor %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info">No history yet. Calculate a shape to save your work.</div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
